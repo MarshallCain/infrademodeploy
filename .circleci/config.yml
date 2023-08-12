@@ -62,7 +62,7 @@ workflows:
   my-workflow:
     jobs:
       - check_aws_version
-      - configure_infrastructure
+#      - configure_infrastructure
 #      - create_infrastructure:
 #          requires:
 #            - check_aws_version
