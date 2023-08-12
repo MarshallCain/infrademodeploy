@@ -10,7 +10,7 @@ Resources:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
       KeyName: ansiblecontrol
-      ImageId: ami-059310caab7e9f4ef 
+      ImageId: ami-09538990a0c4fe9be 
       InstanceType: t2.micro
       Tags:
         - Key: Name
