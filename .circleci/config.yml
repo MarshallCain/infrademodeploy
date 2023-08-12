@@ -10,9 +10,8 @@ commands:
           # ${CIRCLE_WORKFLOW_ID} is a Built-in environment variable 
           # ${CIRCLE_WORKFLOW_ID:0:5} takes the first 5 chars of the variable CIRCLE_CI_WORKFLOW_ID 
           when: on_fail
-          #command: |
-          #  aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
-          command: echo "Destroy"
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
@@ -22,14 +21,18 @@ jobs:
       - image: cimg/aws:2023.08
     steps:
       - run: aws --version
-      - destroy_environment
-  
+      - run: echo ${CIRCLE_WORKFLOW_ID:0:5}
   create_infrastructure:
     docker:
       - image: cimg/aws:2023.08
     steps:
       - checkout
-      - run: aws --version
+      - run:
+          name: Create Cloudformation stack
+          command: |
+              aws cloudformation deploy --template-file template.yml \
+              --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+              --region us-east-1
       - destroy_environment
 
 
