@@ -38,7 +38,7 @@ jobs:
 
   configure_infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: python:3.11-alpine3.17
     steps:
       - checkout
       - run: pwd
@@ -50,10 +50,10 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             apk add --update ansible 
-      #- run:
-      #    name: Configure server
-      #    command: |
-      #      ansible-playbook -i ./mybooks/inventory ./mybooks/main-nodesetup.yml
+      - run:
+          name: Configure server
+          command: |
+            ansible-playbook -i inventory main-nodesetup.yml
 
 
 # Orchestrate jobs using workflows
