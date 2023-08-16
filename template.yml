@@ -9,7 +9,7 @@ Resources:
     Properties:
       SecurityGroups:
         - !Ref InstanceSecurityGroup
-      KeyName: ansiblecontrol
+      KeyName: ansiblenodes
       ImageId: ami-09538990a0c4fe9be 
       InstanceType: t2.micro
       Tags:
